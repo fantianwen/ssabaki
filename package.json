@@ -1,0 +1,105 @@
+{
+  "name": "sabaki",
+  "productName": "Sabaki",
+  "version": "0.35.1",
+  "description": "An elegant Go/Baduk/Weiqi board and SGF editor for a more civilized age.",
+  "author": "Yichuan Shen <shen.yichuan@gmail.com>",
+  "homepage": "http://sabaki.yichuanshen.de",
+  "license": "MIT",
+  "main": "./src/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SabakiHQ/Sabaki"
+  },
+  "bugs": {
+    "url": "https://github.com/SabakiHQ/Sabaki/issues"
+  },
+  "build": {
+    "appId": "de.yichuanshen.sabaki",
+    "copyright": "Copyright © 2015-2018 Yichuan Shen",
+    "compression": "maximum",
+    "linux": {
+      "target": "AppImage",
+      "category": "Game"
+    },
+    "mac": {
+      "category": "public.app-category.board-games",
+      "target": [
+        "7z"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    },
+    "fileAssociations": [
+      {
+        "ext": "sgf",
+        "name": "SGF",
+        "description": "Smart Game Format"
+      },
+      {
+        "ext": "ngf",
+        "name": "NGF",
+        "description": "wBaduk NGF"
+      },
+      {
+        "ext": "gib",
+        "name": "GIB",
+        "description": "Tygem GIB"
+      }
+    ],
+    "files": [
+      "**/*",
+      "bundle.js",
+      "!bundle.js.map",
+      "!**/{.c9,scss,docs,test,tests,devtools,plugins,examples}${/*}",
+      "!data/shapes.sgf",
+      "!src/components${/*}",
+      "!src/modules${/*}"
+    ]
+  },
+  "dependencies": {
+    "@mariotacke/color-thief": "^3.0.1",
+    "@sabaki/deadstones": "^2.1.0",
+    "@sabaki/gtp": "^1.3.1",
+    "@sabaki/influence": "^1.1.4",
+    "@sabaki/sgf": "^2.1.0",
+    "@sabaki/shudan": "^1.0.0",
+    "argv-split": "^2.0.1",
+    "classnames": "^2.2.6",
+    "iconv-lite": "^0.4.24",
+    "jschardet": "^1.6.0",
+    "natsort": "^1.0.6",
+    "octicons": "^8.1.0",
+    "pikaday": "^1.7.0",
+    "preact": "^8.3.1",
+    "react-markdown": "^3.6.0",
+    "recursive-copy": "^2.0.9",
+    "remark-breaks": "^1.0.1",
+    "rimraf": "^2.6.2",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "electron": "^3.0.0",
+    "electron-builder": "^20.28.4",
+    "mocha": "^5.2.0",
+    "raw-loader": "^0.5.1",
+    "react": "^16.5.2",
+    "tmp": "0.0.33",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "electron ./",
+    "bundle": "webpack --mode production --progress",
+    "watch": "webpack --mode development --progress --watch",
+    "build": "npm run bundle && electron-builder --dir",
+    "dist:macos": "npm run bundle && electron-builder -m --x64",
+    "dist:linux": "npm run bundle && electron-builder -l --ia32 --x64",
+    "dist:win32": "npm run bundle && electron-builder -w --ia32",
+    "dist:win64": "npm run bundle && electron-builder -w --x64"
+  }
+}
